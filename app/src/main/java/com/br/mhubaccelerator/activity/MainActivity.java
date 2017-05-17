@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         acelerometro.setEixoX(event.values[0]);
         acelerometro.setEixoY(event.values[1]);
         acelerometro.setEixoZ(event.values[2]);
-
         tvX.setText("X :" + acelerometro.getEixoX());
         tvY.setText("Y :" + acelerometro.getEixoY());
         tvZ.setText("Z :" + acelerometro.getEixoZ());
@@ -95,7 +94,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void connected(NodeConnection nodeConnection) {
-
+        ApplicationMessage message = new ApplicationMessage();
+        message.setContentObject("Registering");
+        try {
+            connection.sendMessage(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
